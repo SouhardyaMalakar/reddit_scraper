@@ -1,12 +1,10 @@
 import csv
-from pickle import NONE
-import re
 import time
 import requests
 from bs4 import BeautifulSoup
 import os
 
-global url, sub, key_wrds, Nodes,k
+global url, sub, key_wrds, Nodes;
 sub = []
 key_wrds = []
 Nodes = []
@@ -25,8 +23,6 @@ class Node:
 
 #  key is the word beinng searched
 # if filter = 1 we filter only subreddits with the key word in name
-
-
 def sub_red(key, filter):
     lst = key.split(" ")
     ser = ''
@@ -49,7 +45,7 @@ def sub_red(key, filter):
         url = node.attrs['href']
         sub.append(url)
         print("r/"+node.text)
-        if(len(sub)==k): break
+        if(len(sub)==2): break
 
 def post(sub, type, filter, sim):
     url = sub+type + "/"
@@ -109,11 +105,9 @@ def post(sub, type, filter, sim):
 
 
 if __name__ == '__main__':
-    k=1;
     key = input('Enter the Topic: ')
     tag = input("Enter the tag: ")
     print("Enter the key words")
-    key_wrds.append(key)
 
     st = input().split(' ')
     f1, f2 = input("Enter f1, f2 {1,0} : ").split(' ')
@@ -135,4 +129,4 @@ if __name__ == '__main__':
             if not file_exists:
                 writer.writeheader()
             writer.writerow({'Title': node.title.encode("utf-8"), 'Author': node.author, 'Upvotes': node.upvote,'Number_of_comments': node.comments, 'Post_link': node.link, 'Reations': node.relation})
-        print(node.title)
+        # print(node.title)
